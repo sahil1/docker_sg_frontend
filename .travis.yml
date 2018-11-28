@@ -7,3 +7,16 @@ before_install:
 
 script:
     - docker run sahil1/docker_sg_frontend npm run test -- --coverage
+
+deploy:
+    provider: elasticbeanstalk
+    region: 'us-west-1'
+    app: 'docker_sg_frontend'
+    env: 'DockerSgFrontend-env'
+    bucket_name: 'elasticbeanstalk-us-west-1-389939832116'
+    bucket_path: 'docker_sg_frontend'
+    on:
+        branch: master
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key:
+        secure: '$AWS_SECRET_KEY'
